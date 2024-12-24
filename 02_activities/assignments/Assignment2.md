@@ -54,7 +54,34 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+type 1
+- new address replaced old one.
+- no historical data is retained.
+
+| Column Name     | Data Type  | Description                             |
+|-----------------|------------|-----------------------------------------|
+| customer_id     | INT        |                                         |
+| address_line    | VARCHAR    | Address line                            |
+| city            | VARCHAR    | City of the address.                    |
+| province        | VARCHAR    | State of the address.                   |
+| postal_code     | VARCHAR    | Postal code.                            |
+| country         | VARCHAR    | Country                                 |
+
+
+type 2
+- when address changes, a new row is inserted.
+- historical data is retained with start_date and end_date.
+
+| Column Name     | Data Type  | Description                             |
+|-----------------|------------|-----------------------------------------|
+| customer_id     | INT        |                                         |
+| address_line    | VARCHAR    | Address line                            |
+| city            | VARCHAR    | City of the address.                    |
+| province        | VARCHAR    | State of the address.                   |
+| postal_code     | VARCHAR    | Postal code.                            |
+| start_date      | DATE       | Date the address became effective.      |
+| end_date        | DATE       | Date the address not effective.         |
+| is_active       | BOOLEAN    | If this is the current address.         |
 ```
 
 ***
